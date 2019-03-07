@@ -1,14 +1,32 @@
 $(document).ready(function () {
 
 
-    var games = ["D&D" , ""];
+    var games = ["Skyrim" , "Devil May Cry" , "Halo" , "Red Dead Redemption"];
     var newGame = '';
 
-    var x = $(this).data("search");
-    console.log(x);
+    var game = $(this).data("search");
+    console.log(game);
     
-    var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + x + 'api_key=m0lBamz8PXqygikoABJKEF4YjRhGMJ2W&limit=10&offset=0&rating=G&lang=en';
+    var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=m0lBamz8PXqygikoABJKEF4YjRhGMJ2W&q=' + game + '&limit=10&offset=0&rating=PG&lang=en';
     console.log(queryURL);
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+        })
+
+        .then(function(response) {
+            console.log(response);
+            var results = response.data;
+
+            for (var i = 0; i<results.length; i++) {
+
+                if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+                    var gifDiv = $("<div>");
+                    gifDiv.addClass("game-gifs");
+                };
+            };
+        });
 
     //function to search for gifs - not done yet
     var findGifs = function () {
@@ -18,7 +36,7 @@ $(document).ready(function () {
     $("#gif-search-go").on("click", function () {
         findGifs();
         addButton();
-    });
+    })
 
     //function to create buttons from whatever is entered into search bar
     var addButton = function () {
@@ -32,12 +50,14 @@ $(document).ready(function () {
     function displayButtons() {
         $("#custom-buttons").empty();
         for (var i = 0; i < games.length; i++) {
-          var a = $('<button class="btn btn-primary">');
-          a.attr("id", "game");
-          a.attr("data-search", games[i]);
-          a.text(games[i]);
-          $("#custom-buttons").append(a);
-        }
+          var gameButton = $('<button class="btn btn-primary">');
+          gameButton.attr("id", "game");
+          gameButton.attr("data-search", games[i]);
+          gameButton.text(games[i]);
+          $("#custom-buttons").append(gameButton);
+        };
+
+
 
 };
 });
