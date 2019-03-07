@@ -1,0 +1,10 @@
+.gif-banner {
+    position: relative;
+    text-align: center;
+    font-size: 2em;
+}
+
+.container {
+    width: 100%;
+    height: 200px;
+}
