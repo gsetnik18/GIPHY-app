@@ -1,17 +1,20 @@
 $(document).ready(function () {
 
-
-    var games = ["Skyrim", "Devil May Cry", "Halo", "Red Dead Redemption"];
+    var games = [];
     //function to add physical buttons to HTML once they have been created in search bar
     function displayButtons() {
         $("#custom-buttons").empty();
         for (var i = 0; i < games.length; i++) {
-            var gameButton = $('<button class="game">');
-            //gameButton.attr("id", "game");
+            var gameButton = $("<button class=“game”>");
+            $(".game").bind("click", function(e){
+                e.preventDefault();
+            console.log("!!")
+            console.log(e);
+            });
+            //gameButton.attr(“id”, “game”);
             gameButton.attr("data-search", games[i]);
             gameButton.text(games[i]);
             $("#custom-buttons").append(gameButton);
-
         };
     };
 
