@@ -1,4 +1,3 @@
-$(document).ready(function () {
 
     var games = [];
     //function to add physical buttons to HTML once they have been created in search bar
@@ -17,11 +16,12 @@ $(document).ready(function () {
             $("#custom-buttons").append(gameButton);
         };
     };
+        var game = $(this).attr("data-search");
 
-
-        var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=m0lBamz8PXqygikoABJKEF4YjRhGMJ2W&q=' + "" + '&limit=10&offset=0&rating=PG&lang=en';
+        var queryURL = 'https://api.giphy.com/v1/gifs/search?q=' + "" + '&api_key=m0lBamz8PXqygikoABJKEF4YjRhGMJ2W&limit=10&offset=0&lang=en';
         console.log(queryURL);
-
+    
+    
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -49,13 +49,16 @@ $(document).ready(function () {
                     };
                 };
             });
-
+        
         $("#gif-search-go").on("click", function (event) {
             event.preventDefault();
             var game = $("#gif-search-bar").val().trim();
             if (game === "") {
                 return;
             };
+
+            addButton();
+
         });
         //function to search for gifs - not done yet
         $(".game").on("click", function(e) {
@@ -64,12 +67,6 @@ $(document).ready(function () {
             console.log(e);
         });
 
-        $("#gif-search-go").on("click", function (e) {
-            console.log(e);
-            //findGifs();
-            addButton();
-        })
-
         //function to create buttons from whatever is entered into search bar
         var addButton = function () {
             newGame = $("#gif-search-bar").val().trim();
@@ -77,8 +74,5 @@ $(document).ready(function () {
             console.log(games);
             displayButtons();
         };
-
-    });
-
-
+    
 //program needs to accept input, read input, reach out to GIPHY database, and use the API search to return relevant gifs
