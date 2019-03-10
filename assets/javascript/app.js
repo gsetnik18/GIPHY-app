@@ -56,9 +56,9 @@
             if (game === "") {
                 return;
             };
-
-            addButton();
-
+            games.push(game);
+            console.log(games);
+            displayButtons();
         });
         //function to search for gifs - not done yet
         $(".game").on("click", function(e) {
@@ -66,13 +66,5 @@
             console.log('!!')
             console.log(e);
         });
-
-        //function to create buttons from whatever is entered into search bar
-        var addButton = function () {
-            newGame = $("#gif-search-bar").val().trim();
-            games.push(newGame);
-            console.log(games);
-            displayButtons();
-        };
     
 //program needs to accept input, read input, reach out to GIPHY database, and use the API search to return relevant gifs
