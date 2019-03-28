@@ -57,6 +57,7 @@
             games.push(game);
             console.log(games);
             displayButtons();
+            $("#gif-search-bar").val("");
         });
         //function to search for gifs - not done yet
         $("#custom-buttons").on("click", ".game", function() {
